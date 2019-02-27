@@ -8,8 +8,9 @@ image_resource:
 
 params:
   SERVICE_ACCOUNT_JSON:
-  KUBERNETES_CLUSTER:
+  KUBERNETES_PROJECT:
   KUBERNETES_REGION:
+  KUBERNETES_CLUSTER:
 
 run:
   path: sh
@@ -21,4 +22,5 @@ run:
       $SERVICE_ACCOUNT_JSON
       EOL
       gcloud auth activate-service-account --key-file ~/gcloud-service-key.json
-      gcloud container clusters get-credentials rm-k8s-cluster --zone europe-west2 --project census-rm-richardweeks17
+      gcloud container clusters get-credentials rm-k8s-cluster --zone $KUBERNETES_REGION --project $KUBERNETES_PROJECT
+      gcloud container clusters resize $KUBERNETES_CLUSTER --size 0 --region=$KUBERNETES_REGION --quiet
