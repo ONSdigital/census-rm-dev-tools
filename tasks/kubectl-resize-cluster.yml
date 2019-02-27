@@ -1,0 +1,19 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: google/cloud-sdk
+    tag: slim
+
+params:
+  KUBERNETES_CLUSTER:
+  KUBERNETES_REGION:
+
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      apt install kubectl
+      gcloud container clusters get-credentials rm-k8s-cluster --zone europe-west2 --project census-rm-richardweeks17

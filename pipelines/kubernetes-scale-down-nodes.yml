@@ -1,0 +1,18 @@
+---
+resources:
+- name: census-rm-dev-tools
+  type: git
+  source: 
+    uri: git@github.com:ONSdigital/census-rm-dev-tools.git
+
+jobs:
+
+- name: scale-down-kubernetes-nodes
+  serial : true
+  plan:
+  - get: census-rm-dev-tools
+  - task: scale-down-nodes
+    file: census-rm-dev-tools/tasks/kubectl-resize-cluster.yml
+    params:
+      KUBERNETES_CLUSTER: ((kubernetes-cluster-name))
+      KUBERNETES_REGION: ((kubernetes-region-name))
