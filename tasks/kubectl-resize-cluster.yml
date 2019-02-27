@@ -7,6 +7,7 @@ image_resource:
     tag: slim
 
 params:
+  SERVICE_ACCOUNT_JSON:
   KUBERNETES_CLUSTER:
   KUBERNETES_REGION:
 
@@ -16,4 +17,8 @@ run:
     - -exc
     - |
       apt install kubectl
+      cat >~/gcloud-service-key.json << EOL
+      $SERVICE_ACCOUNT_JSON
+      EOL
+      gcloud auth activate-service-account --key-file ~/gcloud-service-key.json
       gcloud container clusters get-credentials rm-k8s-cluster --zone europe-west2 --project census-rm-richardweeks17
