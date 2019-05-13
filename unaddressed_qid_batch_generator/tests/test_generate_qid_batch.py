@@ -2,16 +2,16 @@ import json
 from pathlib import Path
 from unittest.mock import patch
 
-from generate_qid_batch import generate_messages_from_config_file
+from generate_qid_batch import generate_messages_from_config_file_path
 
 
-def test_generate_messages_from_config_file():
+def test_generate_messages_from_config_file_path():
     # Given
     config_file_path = Path(__file__).parent.resolve().joinpath('resources').joinpath('test_batch.csv')
 
     # When
     with patch('generate_qid_batch.RabbitContext') as patch_rabbit:
-        generate_messages_from_config_file(config_file_path)
+        generate_messages_from_config_file_path(config_file_path)
 
     # Then
     patch_rabbit_context = patch_rabbit.return_value.__enter__.return_value
