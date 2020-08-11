@@ -33,13 +33,13 @@ pipenv install --dev
 If you're going to be running these commands regularly it may be helpful to have the scripts on your `PATH` and set up some alias in your cloudshell bash.
 Add these lines to your `~/.bashrc` file in the cloudshell 
 ```shell script
-export PATH="<PATH_TO_CENSUS_RM_DEV_TOOLS>/cloudshell_utilities:$PATH"
+export PATH="<PATH_TO_CENSUS_RM_DEV_TOOLS>:$PATH"
 alias prod-configure="configure_and_whitelist.sh census-rm-prod"
 alias prod-exit="remove_from_whitelist.sh census-rm-prod"
 
 function prod-toolbox {
     prod-configure
-    kubectl exec -it $(kubectl get pods --selector=app=census-rm-toolbox -o jsonpath='{.items[*].metadata.name}') -- /bin/bash || true
+    kubectl exec -it $(kubectl get pods --selector=app=census-rm-toolbox -o jsonpath='{.items[*].metadata.name}') -— bash -c "export CLOUD_SHELL_USER=$LOGNAME && bash" || true
     prod-exit
 }
 ```
