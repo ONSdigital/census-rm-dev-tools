@@ -39,7 +39,7 @@ alias prod-exit="remove_from_whitelist.sh census-rm-prod"
 
 function prod-toolbox {
     prod-configure
-    kubectl exec -it $(kubectl get pods --selector=app=census-rm-toolbox -o jsonpath='{.items[*].metadata.name}') -— bash -c "export CLOUD_SHELL_USER=$LOGNAME && bash" || true
+    kubectl exec -it $(kubectl get pods --selector=app=census-rm-toolbox -o jsonpath='{.items[*].metadata.name}') -- bash -c "export CLOUD_SHELL_USER=$LOGNAME && bash" || true
     prod-exit
 }
 ```
