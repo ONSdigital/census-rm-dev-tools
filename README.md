@@ -12,6 +12,7 @@ git clone https://github.com/ONSdigital/census-rm-dev-tools.git
 ```
 
 ### Set up python and dev/support shortcuts
+Run these commands in your cloudshell. It may take a few minutes to install python.
 ```shell script
 pushd ~/census-rm-dev-tools
 ./cloudshell_setup/setup_python_and_tools.sh
