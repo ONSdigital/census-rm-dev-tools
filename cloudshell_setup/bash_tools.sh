@@ -1,10 +1,6 @@
 
 # Dev tools
 export PATH="/home/adam_hawtin/census-rm-dev-tools:$PATH"
-
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-
 alias set-project="gcloud config set project"
 
 function whitelist {
