@@ -15,4 +15,4 @@ helm init --client-only
 helm plugin install https://github.com/rimusz/helm-tiller
 helm version --client
 
-exec bash
+exec "$SHELL"
