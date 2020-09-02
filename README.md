@@ -56,6 +56,33 @@ It is then important to:
 dewhitelist
 ```
 
+### Terraform and Helm
+We use terraform (via tfenv) and helm v2 with the tillerless plugin for our infrastructure management, these are the steps to set up those tools on your cloudshell. This is only necessary if you need to be able to make infrastructure changes.
+
+#### Creating a github personal token
+Clone the terraform repo with
+The easiest way to clone the terraform repo on a cloudshell is with a personal token. Follow the steps here https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token and create a token with only "repo" permissions.
+**Do not** store this token anywhere. If you need to clone or pull the repo again just regenerate the token. Copy the token, you'll need it for the next step.
+
+#### Run the setup script
+```shell script
+pushd ~/census-rm-dev-tools
+./cloudshell_setup/setup_terraform_and_helm.sh
+popd
+```
+The first thing this does is attempt to clone our terraform repo. You will be prompted for your github username and password. Enter your username as normal but paste the access token in the place of the password.
+It then installs `tfenv` and `helm v2` plus the tillerless plugin. The first time you run any terraform commands, `tfenv` should automatically install and use the required `terraform cli` version.
+
+#### Checking out a terraform release
+If you need to run terraform at a tagged version run
+```shell script
+cd ~/census-rm-terraform
+git checkout <TAG>
+```
+This should prompt you again for your github credentials so you'll need to regenerate your access token from earlier. Navigate to the token you created in your github developer settings and click `regenerate token` and copy the regenerated token.
+Paste the token in place of your password again and it should check out the tag you passed in.
+
+
 ## Work From Home (WFH) Whitelist Script
 To whitelist yourself on White Lodge and Black Lodge clusters and DB, plus a bunch of other things, run this script:
 ```bash
