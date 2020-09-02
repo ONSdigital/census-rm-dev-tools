@@ -60,9 +60,9 @@ dewhitelist
 We use terraform (via tfenv) and helm v2 with the tillerless plugin for our infrastructure management, these are the steps to set up those tools on your cloudshell. This is only necessary if you need to be able to make infrastructure changes.
 
 #### Creating a github personal token
-Clone the terraform repo with
 The easiest way to clone the terraform repo on a cloudshell is with a personal token. Follow the steps here https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token and create a token with only "repo" permissions.
-**Do not** store this token anywhere. If you need to clone or pull the repo again just regenerate the token. Copy the token, you'll need it for the next step.
+**Do not** store this token anywhere, treat it like a password. If you need to clone or pull the repo again you can regenerate the token. 
+Copy the token, you'll need it for the next step.
 
 #### Run the setup script
 ```shell script
@@ -71,7 +71,7 @@ pushd ~/census-rm-dev-tools
 popd
 ```
 The first thing this does is attempt to clone our terraform repo. You will be prompted for your github username and password. Enter your username as normal but paste the access token in the place of the password.
-It then installs `tfenv` and `helm v2` plus the tillerless plugin. The first time you run any terraform commands, `tfenv` should automatically install and use the required `terraform cli` version.
+It then installs `tfenv` and `helm v2` plus the tillerless plugin. The first time you run any of the terraform scripts, `tfenv` should automatically install and use the required `terraform cli` version.
 
 #### Checking out a terraform release
 If you need to run terraform at a tagged version run
