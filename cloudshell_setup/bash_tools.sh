@@ -1,6 +1,6 @@
 
 # Dev tools
-export PATH="~/census-rm-dev-tools:$PATH"
+export PATH="$HOME/census-rm-dev-tools:$PATH"
 alias set-project="gcloud config set project"
 
 function whitelist {
