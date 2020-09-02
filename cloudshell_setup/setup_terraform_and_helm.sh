@@ -11,6 +11,6 @@ chmod 700 get_helm.sh
 helm init --client-only
 helm plugin install https://github.com/rimusz/helm-tiller
 
-helm version
+helm version --client
 
 exec bash
