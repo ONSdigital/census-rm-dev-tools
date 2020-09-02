@@ -8,7 +8,7 @@ See https://cloud.google.com/shell/docs for help on cloudshell basics and docume
 
 ### Clone this repo
 ```shell script
-git clone https://github.com/ONSdigital/census-rm-dev-tools.git
+git clone https://github.com/ONSdigital/census-rm-dev-tools.git ~/census-rm-dev-tools
 ```
 
 ### Set up python and dev/support shortcuts
