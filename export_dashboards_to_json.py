@@ -20,9 +20,19 @@ def main(project):
     dashboards = response.json()['dashboards']
     for dashboard in dashboards:
         delete_project_specific_keys(dashboard)
+        sort_dashboard_by_widget_title(dashboard)
         file_name = f"{dashboard['displayName']}.json"
         with open(file_name, 'w') as export_file:
             json.dump(dashboard, export_file, indent=4)
+
+
+def sort_dashboard_by_widget_title(dashboard):
+    if 'mosaicLayout' in dashboard:
+        dashboard['mosaicLayout']['tiles'] = sorted(dashboard['mosaicLayout']['tiles'],
+                                                    key=lambda widget: widget['widget']['title'].lower())
+    elif 'gridLayout' in dashboard:
+        dashboard['gridLayout']['widgets'] = sorted(dashboard['gridLayout']['widgets'],
+                                                    key=lambda widget: widget['title'].lower())
 
 
 def delete_project_specific_keys(dashboard):
@@ -31,7 +41,8 @@ def delete_project_specific_keys(dashboard):
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Script to dump dashboards to individual JSON files')
+    parser = argparse.ArgumentParser(
+        description='Script to dump dashboards (sorted by "title") to individual JSON files')
     parser.add_argument('project', help='Project', type=str)
     return parser.parse_args()
 
