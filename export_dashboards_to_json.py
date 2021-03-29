@@ -29,10 +29,18 @@ def main(project):
 def sort_dashboard_by_widget_title(dashboard):
     if 'mosaicLayout' in dashboard:
         dashboard['mosaicLayout']['tiles'] = sorted(dashboard['mosaicLayout']['tiles'],
-                                                    key=lambda widget: widget['widget']['title'].lower())
+                                                    key=lambda title: title['widget']['title'].lower())
     elif 'gridLayout' in dashboard:
         dashboard['gridLayout']['widgets'] = sorted(dashboard['gridLayout']['widgets'],
-                                                    key=lambda widget: widget['title'].lower())
+                                                    key=lambda title: title['title'].lower())
+    elif 'rowLayout' in dashboard:
+        for index, row in enumerate(dashboard['rowLayout']['rows']):
+            dashboard['rowLayout']['rows'][index] = sorted(row['row']['widgets'],
+                                                           key=lambda title: title['widget']['title'].lower())
+    elif 'columnLayout' in dashboard:
+        for index, column in enumerate(dashboard['columnLayout']['columns']):
+            dashboard['columnLayout']['columns'][index] = sorted(column['column']['widgets'],
+                                                                 key=lambda title: title['widget']['title'].lower())
 
 
 def delete_project_specific_keys(dashboard):
