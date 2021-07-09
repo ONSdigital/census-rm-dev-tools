@@ -3,6 +3,7 @@ import json
 
 from whitelist_cluster_ip import whitelist_cluster_list
 from whitelist_db_ip import whitelist_db_list
+from whitelist_security import whitelist_security_list
 from whitelist_service_ip import whitelist_service_ip_list
 
 
@@ -19,12 +20,15 @@ def whitelist(project_id, config_file_name):
 
     cluster_whitelist = []
     db_whitelist = []
+    security_whitelist = []
     for person in whitelist:
         if person['cluster']:
             cluster_whitelist.append(person)
 
         if person['database']:
             db_whitelist.append(person)
+        if person['security-policy']:
+            security_whitelist.append(f'{person["ip"]}/32')
 
     services = set()
     for person in whitelist:
@@ -33,6 +37,7 @@ def whitelist(project_id, config_file_name):
 
     whitelist_cluster_list(project_id, cluster_whitelist)
     whitelist_db_list(db_whitelist, project_id)
+    whitelist_security_list(project_id,security_whitelist)
 
     for service in services:
         ip_list = []
